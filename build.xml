@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="android_project" default="autoapk" basedir=".">
+	<property file="../build.properties"/>
+	<property file="../buildProjectHome.properties"/>
+	<property file="project.properties"/>
+	<property name="outdir" value="${project.outdir}" />
+	<property name="unsigned-name" value="${project.outdir}/${project.name}_unsigned.apk" />
+	<property name="signed-name" value="${project.outdir}/${project.name}_signed.apk" />
+	<property name="release-name" value="${project.outdir}/${project.name}.apk" />	
+	<property environment="env"/>
+	<property name="Android_Compile_Revision" value="${env.Android_Compile_Revision}"></property>
+		
+	<!-- Create the output directories if they don't exist yet. -->
+	<target name="dirs">
+		<echo>del and creating output directories if needed...</echo>
+		<delete dir="${outdir}"/>
+		<delete dir="${gen-dir}"/>
+		<mkdir dir="${outdir}" />
+		<mkdir dir="${gen-dir}" />
+                <echo> outdir is :  ${outdir} </echo>
+	</target>
+
+	<!-- Generate the R.java file for this project's resources. -->
+	<target name="resource-src" depends="dirs">
+		<echo>Generating R.java from the resources...</echo>
+		<exec executable="${android-aapt}" failonerror="true">
+			<arg value="package" />
+			<arg value="-f" />
+			<arg value="-m" />
+			<arg value="-J" />
+			<arg value="${gen-dir}" />
+			<arg value="-M" />
+			<arg value="${project.home}/AndroidManifest.xml" />
+			<arg value="-S" />
+			<arg value="${resource-dir}" />
+			<arg value="-I" />
+			<arg value="${android-jar}" />
+			<arg value="--auto-add-overlay" />
+		</exec>
+	</target>
+	
+	<!-- Compile this project's .java files into .class files. -->
+	<target name="compile" depends="dirs, resource-src">
+		<javac encoding="utf-8" debug="true" extdirs="" srcdir="${project.home}/src;${gen-dir}" destdir="${outdir}" bootclasspath="${android-jar};${annotations-jar}" includeantruntime="on">
+			<classpath>
+				<fileset dir="${android.library.reference.1}/bin" includes="*.jar" />
+				<fileset dir="${external-libs}" includes="*.jar" />
+				<fileset dir="${external-map-libs}" includes="*.jar" />
+			</classpath>
+		</javac>
+	</target>
+	
+	<!-- Convert this project's .class files into .dex files. --> 
+	<target name="dex" depends="compile"> 
+		<echo>Converting compiled files and external libraries into ${intermediate-dex-location}...</echo> 
+		<apply executable="${android-dx}" failonerror="true" parallel="true"> 
+		  <arg value="--dex" /> 
+		  <arg value="--output=${intermediate-dex-location}" /> 
+		  <arg path="${project.outdir}" /> 
+		  		<fileset dir="${android.library.reference.1}/bin" includes="*.jar" />
+		  		<fileset dir="${external-libs}" includes="*.jar"/> 
+		</apply> 
+	</target> 
+
+	<!-- Put the project's resources into the output package file. -->
+	<target name="package-res-and-assets">
+		<echo>Packaging resources and assets...</echo>
+		<exec executable="${android-aapt}" failonerror="true">
+			<arg value="package" />
+			<arg value="-f" />
+			<arg value="-M" />
+			<arg value="${project.home}/AndroidManifest.xml" />
+			<arg value="-S" />
+			<arg value="${resource-dir}" />
+			<arg value="-A" />
+			<arg value="${asset-dir}" />
+			<arg value="-I" />
+			<arg value="${android-jar}" />
+			<arg value="-F" />
+			<arg value="${resources-package}" />
+			<arg value="--auto-add-overlay" />
+		</exec>
+	</target>
+
+	<!-- Package the application without signing it.
+	    	 This allows for the application to be signed later with an official publishing key. -->
+	<target name="release" depends="dex, package-res-and-assets">
+		<echo>Packaging for release...</echo>
+		<exec executable="${android-builder}" failonerror="true">
+			<arg value="${unsigned-name}" />
+			<arg value="-u" />
+			<arg value="-z" />
+			<arg value="${resources-package}" />
+			<arg value="-f" />
+			<arg value="${intermediate-dex-location}" />
+			<arg value="-rf" />
+			<arg value="${project.home}/src" />
+			<arg value="-rj" />
+			<arg value="${external-libs}" />
+			<arg value="-nf" />
+			<arg value="${external-libs}" />
+		</exec>
+		<echo>It will need to be signed with jarsigner before being published.</echo>
+	</target>
+
+	<!--进行签名-->
+	<target name="jarsigner" depends="release">
+		<exec executable="${jarsigner}" failonerror="true">
+			<arg value="-verbose" />
+			<arg value="-storepass" />
+			<arg value="${keystore.password}" />
+			<arg value="-keystore" />
+			<arg value="${root_dir}ahmmc-release.keystore" />
+			<arg value="-signedjar" />
+			<arg value="${signed-name}" />
+			<arg value="${unsigned-name}" />
+			<arg value="ahmmc-release.keystore" />
+		</exec>
+	</target>
+	
+	<!--进行优化-->  
+	<target name="zipalign" depends="jarsigner">  
+	        <exec executable="${android-zipalign}" failonerror="true">  
+        	    <arg value="-v" />  
+	            <arg value="-f" />  
+	            <arg value="4" />  
+        	    <arg value="${signed-name}" />  
+	            <arg value="${release-name}" />  
+        	</exec>  
+	</target> 
+
+	<target name="delete" depends="zipalign">
+                <echo>del unneed apk...</echo>
+                <delete file="${unsigned-name}"/>
+				<delete file="${signed-name}"/>
+        </target>
+
+	<target name="copy" depends="delete">
+                <echo>copy apk file to release...</echo>
+                <copy file="${release-name}" todir="${release-dir}" overwrite="true"/>
+   	</target>
+
+	<target name="autoapk" depends="copy">  
+	      <echo message="auto apk finish!"/>  
+	</target>  
+	
+</project>

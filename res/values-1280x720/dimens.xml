@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- activity_main -->
+    <dimen name = "left_width">533dp</dimen>
+    <dimen name = "left_height">560dp</dimen>
+    <dimen name = "left_margin_left">100dp</dimen>
+    <dimen name = "left_margin_top">90dp</dimen>
+    <dimen name = "top_layout_width">535dp</dimen>
+    <dimen name = "top_layout_height">77dp</dimen>
+    <dimen name = "arrow_width">56dp</dimen>
+    <dimen name = "arrow_height">46dp</dimen>
+    <dimen name = "left_arrow_margin_left">50dp</dimen>
+    <dimen name = "tag_year_month_margin_left">50dp</dimen>
+    <dimen name = "tag_year_month_textsize">40sp</dimen>
+    <dimen name = "window_layout_margin_left">9dp</dimen>
+    <dimen name = "window_layout_margin_top">39dp</dimen>
+    <dimen name = "grid_layout_width">525dp</dimen>
+    <dimen name = "grid_layout_height">420dp</dimen>
+    <dimen name = "grid_divider_width">3dp</dimen>
+    <dimen name = "grid_divider_margin_top">68dp</dimen>
+    <dimen name = "grid_divider_margin_left">74dp</dimen>
+    <dimen name = "grid_divider_horizontal_gap">70dp</dimen>
+    <dimen name = "grid_divider_vertical_gap">75dp</dimen>
+    <dimen name = "gridview_column_width">75dp</dimen>
+    <dimen name = "gridview_vertical_spacing">4dp</dimen>
+    <dimen name = "gridview_margin_top">2dp</dimen>
+    <dimen name = "gridview_margin_left">1dp</dimen>
+    <dimen name = "right_width">540dp</dimen>
+    <dimen name = "right_height">560dp</dimen>
+    <dimen name = "right_margin_top">90dp</dimen>
+    <dimen name = "clock_margin_left">156dp</dimen>
+    <dimen name = "timer_width">44dp</dimen>
+    <dimen name = "timer_height">57dp</dimen>
+    <dimen name = "lunar_height">478dp</dimen>
+    <dimen name = "lunar_width">532dp</dimen>
+    <dimen name = "lunar_layout_margin_top">1dp</dimen>
+    <dimen name = "lunar_layout_margin_bottom">20dp</dimen>
+    <dimen name = "lunar_margin_bottom">20dp</dimen>
+    <dimen name = "lunar_month_day_layout_height">77dp</dimen>
+    <dimen name = "lunar_month_day_layout_margin_bottom">20dp</dimen>
+    <dimen name = "lunar_month_day_layout_padding_left">20dp</dimen>
+    <dimen name = "lunar_month_day_layout_padding_right">20dp</dimen>
+    <dimen name = "lunar_month_day_layout_width">166dp</dimen>
+    <dimen name = "lunar_month_day_width">50dp</dimen>
+    <dimen name = "lunar_month_day_height">68dp</dimen>
+    <dimen name = "pic_year_height">57dp</dimen>
+    <dimen name = "almanac_height">180dp</dimen>
+    <dimen name = "text_suit_width">160dp</dimen>
+    <dimen name = "text_suit_margin_top">40dp</dimen>
+    <dimen name = "text_suit_padding_left">10dp</dimen>
+    <dimen name = "text_suit_padding_right">10dp</dimen>
+    <dimen name = "text_suit_textsize">18sp</dimen>
+    <dimen name = "lunar_day_num_width">217dp</dimen>
+    <dimen name = "lunar_day_num_margin_top">20dp</dimen>
+    <dimen name = "pic_day_num_width">108dp</dimen>
+    <dimen name = "pic_day_num_height">160dp</dimen>
+    <dimen name = "text_jieri_textsize">25sp</dimen>
+    <dimen name = "text_tgmonth_width">218dp</dimen>
+    <dimen name = "text_tgmonth_padding_bottom">32dp</dimen>
+    <dimen name = "text_tgmonth_padding_left">100dp</dimen>
+    <dimen name = "text_tgmonth_textsize">20sp</dimen>
+    <dimen name = "text_tgyear_width">101dp</dimen>
+    <dimen name = "text_tgyear_textsize">30sp</dimen>
+    
+    <!-- grid_item -->
+    <dimen name = "grid_item_width">75dp</dimen>
+    <dimen name = "grid_item_height">70dp</dimen>
+    <dimen name = "spot_width">25dp</dimen>
+    <dimen name = "spot_height">15dp</dimen>
+    <dimen name = "gc_width">37dp</dimen>
+    <dimen name = "gc_height">28dp</dimen>
+    <dimen name = "gc_textsize">20sp</dimen>
+    <dimen name = "lc_textsize">14sp</dimen>
+    <dimen name = "md_height">23dp</dimen>
+    <dimen name = "md_textsize">12sp</dimen>
+    
+    <!-- ratate_animation -->
+    <dimen name = "rotate_animation_from_x">1100dp</dimen>
+    <dimen name = "rotate_animation_from_y">-2800dp</dimen>
+</resources>

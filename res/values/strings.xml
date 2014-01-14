@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="app_name">Calendar1</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="mouse">鼠</string>
+    <string name="ox">牛</string>
+    <string name="tiger">虎</string>
+    <string name="rabbit">兔</string>
+    <string name="dragon">龙</string>
+    <string name="snake">蛇</string>
+    <string name="horse">马</string>
+    <string name="sheep">羊</string>
+    <string name="monkey">猴</string>
+    <string name="chicken">鸡</string>
+    <string name="dog">狗</string>
+    <string name="pig">猪</string>
+
+</resources>
